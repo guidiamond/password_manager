@@ -5,20 +5,19 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-class KeyGenerator:
+class Encryptor:
     def __init__(self, key):
         self.key = key
-        self.f = Fernet(self.key)
+        self.fernet = Fernet(self.key)
 
-    def crypt(self, file_name, message):
+    def en_crypt(self, file_name, message):
         message = message.encode()
-        encrypted = self.f.encrypt(message)
+        encrypted = self.fernet.encrypt(message)
         with open(file_name + ".txt", 'wb') as ff:
             ff.write(encrypted)
-        print("ok")
-    def deccrypt(self, file):
+            
+    def de_crypt(self, file):
         with open(file + ".txt", 'rb') as ff:
             fa = ff.read()
-
-        decrypted = self.f.decrypt(fa)
-        print(decrypted.decode())
+        decrypted_message = self.fernet.decrypt(fa)
+        print(decrypted_message.decode())

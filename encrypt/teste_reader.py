@@ -1,2 +1,2 @@
-from os import path
-print(path.exists("testa.txt"))
+with open ("blablabla.txt" , "w") as ff:
+    ff.write("dasfsdfas")

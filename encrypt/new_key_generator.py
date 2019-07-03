@@ -12,7 +12,7 @@ class NewKeyGenerator:
 
     def generate_new_key(self, auth_pass):
         # If the path exists dont do anything
-        if path.exists(self.file):
+        if path.exists("key.key"):
             return 0
         password = auth_pass.encode() # Convert pass to type bytes
         kdf = PBKDF2HMAC(
@@ -25,10 +25,10 @@ class NewKeyGenerator:
         # Key generator
         key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf once
         # Save generated key to file
-        with open(self.file, "wb") as ff:
+        with open("key.key", "wb") as ff:
             ff.write(key)
 
     def read_key(self):
-        with open(self.file, "rb") as ff:
+        with open("key.key", "rb") as ff:
             fa = ff.read()
         return fa

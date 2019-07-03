@@ -3,8 +3,9 @@ from .new_key_generator import NewKeyGenerator
 
 class EncryptInterface:
     def __init__(self, option):
+        key_pass = input("Type the key used to read/write the password: ")
+        
         if option == "1":
-            key_pass = input("Type the key used to read/write the password: ")
             file_name = input("File name: ")
             message = input("Type your message to be encrypted: ")
             # Key read and generation (if needed)
@@ -13,7 +14,8 @@ class EncryptInterface:
             key = key.read_key()
             # Pass encryption
             password = Encryptor(key)
-            # password.en_crypt(file_name, message)
+            password.en_crypt(file_name, message)
 
         elif option == "2":
+
             password.de_crypt(file_name + ".txt")

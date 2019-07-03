@@ -3,7 +3,7 @@ from .key_generator import KeyGenerator
 
 class EncryptInterface:
     def __init__(self, option):
-        if option not in ("0", "1"):
+        if option not in ("0", "1", "2"):
             print("\nWrong Option!\n")
             return None
         key = KeyGenerator()

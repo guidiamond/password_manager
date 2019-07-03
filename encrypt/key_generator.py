@@ -5,15 +5,12 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from os import path
+from .encryptor import Encryptor
 
-class NewKeyGenerator:
-    def __init__(self, file):
-        self.file = file + ".txt"
+class KeyGenerator:
 
-    def generate_new_key(self, auth_pass):
-        # If the path exists dont do anything
-        if path.exists("key.key"):
-            return 0
+    def generate(self, auth_pass, save_key):
+
         password = auth_pass.encode() # Convert pass to type bytes
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
@@ -24,11 +21,19 @@ class NewKeyGenerator:
         )
         # Key generator
         key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf once
+        # Don't save if user doesn't want to
+        if save_key == "n":
+            return key
         # Save generated key to file
         with open("key.key", "wb") as ff:
             ff.write(key)
+        return key
 
     def read_key(self):
-        with open("key.key", "rb") as ff:
-            fa = ff.read()
-        return fa
+        # If key exists read it
+        if path.exists("key.key"):
+            with open("key.key", "rb") as key_file:
+                key = key_file.read()
+            return key
+        else:
+            return None

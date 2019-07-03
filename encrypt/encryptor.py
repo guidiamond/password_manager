@@ -17,7 +17,7 @@ class Encryptor:
             ff.write(encrypted)
             
     def de_crypt(self, file_name):
-        with open(file_name + ".txt", 'rb') as ff:
+        with open(file_name, 'rb') as ff:
             fa = ff.read()
-        decrypted_message = self.fernet.decrypt(fa)
-        print(decrypted_message.decode())
+        decrypted_message = self.fernet.decrypt(fa).decode()
+        return decrypted_message

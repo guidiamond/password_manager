@@ -1,4 +1,4 @@
-from .add_zip import AddToZip
+from .add_zip import ZipManager
 from .read_zip import ReadZip
 from .create_zip import CreateZip
 import os
@@ -6,8 +6,10 @@ import os
 
 class ZipInterface:
     def __init__(self, option):
+        manager = ZipManager(".")
+        manager.check_for_zip()
         if option == "1":
-            AddToZip.add_to_zip()
+            manager.add_to_zip()
         elif option == "2":
             check = CreateZip.check_for_zip()
             CreateZip.create_zip(check)

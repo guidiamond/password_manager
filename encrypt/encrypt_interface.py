@@ -1,21 +1,32 @@
 from .encryptor import Encryptor
-from .new_key_generator import NewKeyGenerator
+from .key_generator import KeyGenerator
 
 class EncryptInterface:
     def __init__(self, option):
-        key_pass = input("Type the key used to read/write the password: ")
-        
+        if option not in ("0", "1"):
+            print("\nWrong Option!\n")
+            return None
+        key = KeyGenerator()
+        key = key.read_key()
+        if key == None:
+            save_key = None
+            while save_key not in ("y", "n"):
+                save_key = input("Would you like to save your key in a file? (Y/N)").lower()
+                print(save_key)
+            key = KeyGenerator()
+            key_pass = input("Type the key to read/write the files: ")
+            key = key.generate(key_pass, save_key)
+        password = Encryptor(key)
+        file_name = input("File name: ")
+
         if option == "1":
-            file_name = input("File name: ")
             message = input("Type your message to be encrypted: ")
-            # Key read and generation (if needed)
-            key = NewKeyGenerator(file_name)
-            key.generate_new_key(key_pass)
-            key = key.read_key()
             # Pass encryption
-            password = Encryptor(key)
             password.en_crypt(file_name, message)
 
         elif option == "2":
-
-            password.de_crypt(file_name + ".txt")
+            # Pass decryption
+            try:
+                print(password.de_crypt(file_name + ".txt"))
+            except:
+                print("Wrong key")

@@ -4,12 +4,10 @@ class Interface:
 
     def __init__(self):
         print("Password Manager 0.3\n")
-        # zip_pass = input("Type the key for openning the zip: ")
-        # text_pass = input("Type the key to decrpyt password: ")
         print("Options:\n")
-        print("1 -> Save new passwords\n")
-        print("2 -> See files | passwords\n")
-        print("0 -> Exit\n")
+        print("1 -> SAVE NEW PASSWORD\n")
+        print("2 -> READ FILE | PASSWORDS\n")
+        print("0 -> EXIT\n")
         option = input("Option: ")
         if option == "0":
             import sys

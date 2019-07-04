@@ -8,9 +8,9 @@ from os import path
 from .encryptor import Encryptor
 
 class KeyGenerator:
-
+    def __init__(self):
+        self.pass_directory='password/'
     def generate(self, auth_pass, save_key):
-
         password = auth_pass.encode() # Convert pass to type bytes
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
@@ -25,14 +25,14 @@ class KeyGenerator:
         if save_key == "n":
             return key
         # Save generated key to file
-        with open("key.key", "wb") as ff:
+        with open(self.pass_directory + "key.key", "wb") as ff:
             ff.write(key)
         return key
 
     def read_key(self):
         # If key exists read it
-        if path.exists("key.key"):
-            with open("key.key", "rb") as key_file:
+        if path.exists(self.pass_directory + "key.key"):
+            with open(self.pass_directory + "key.key", "rb") as key_file:
                 key = key_file.read()
             return key
         else:

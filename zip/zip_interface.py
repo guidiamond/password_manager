@@ -1,4 +1,4 @@
-from .add_zip import ZipManager
+from .zip_manager import ZipManager
 from .read_zip import ReadZip
 from .create_zip import CreateZip
 import os
@@ -6,17 +6,17 @@ import os
 
 class ZipInterface:
     def __init__(self, option):
-        manager = ZipManager(".")
-        manager.check_for_zip()
-        if option == "1":
+        manager = ZipManager()
+        zip_exists = manager.check_for_zip()
+        if not zip_exists:
+            manager.create_zip()
+        if option == "3":
             manager.add_to_zip()
-        elif option == "2":
-            check = CreateZip.check_for_zip()
-            CreateZip.create_zip(check)
-            file_name = ReadZip.read_zip()
-            ReadZip.read_file(file_name)
-        elif option == "0":
-            return None
+        # elif option == "2":
+        #     check = CreateZip.check_for_zip()
+        #     CreateZip.create_zip(check)
+        #     file_name = ReadZip.read_zip()
+        #     ReadZip.read_file(file_name)
         return None
 
 # add and read with zip password

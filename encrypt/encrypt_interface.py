@@ -4,6 +4,8 @@ from .key_generator import KeyGenerator
 class EncryptInterface:
     def __init__(self, option):
         # Check for valid input
+        if option == "3":
+            return None
         if option not in ("1", "2"):
             print("\nWrong Option!\n")
             return None

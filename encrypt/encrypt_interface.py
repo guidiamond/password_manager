@@ -1,5 +1,6 @@
 from .encryptor import Encryptor
 from .key_generator import KeyGenerator
+import os
 
 class EncryptInterface:
     def __init__(self, option):
@@ -23,9 +24,9 @@ class EncryptInterface:
             key_pass = input("Type the key to read/write the files: ")
             key = key.generate(key_pass, save_key)
         password = Encryptor(key)
-        file_name = input("What is the name of the file? ")
 
         if option == "1":
+            file_name = input("What is the name of the file? ")  
             message = input("Type your message to be encrypted: ")
             # Pass encryption
             password.en_crypt(file_name, message)
@@ -34,6 +35,7 @@ class EncryptInterface:
             print("\n###############################\n ")
         elif option == "2":
             # Pass decryption
+            # file_location = os.path.join(self.directory, 'password.zip')
             try:
                 print("\n###############################\n")
                 print("\tPASSWORD:")

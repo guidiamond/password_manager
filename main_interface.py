@@ -17,8 +17,12 @@ class Interface:
         # Check for user input
         while len(option.strip()) == 0:
             option = input("Option: ")
-        EncryptInterface(option)
-        ZipInterface(option)
+        if option == "1" or option == "3":
+            EncryptInterface(option)
+            ZipInterface(option)
+        elif option == "2":
+            ZipInterface(option)
+            # EncryptInterface(option)
 
 if __name__ == '__main__':
     while True:

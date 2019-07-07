@@ -3,7 +3,7 @@ from encrypt.encrypt_interface import EncryptInterface
 class Interface:
 
     def __init__(self):
-        print("Password Manager 0.3\n")
+        print("Password Manager 0.4\n")
         print("Options:\n")
         print("1 -> Encrypt new file\n")
         print("2 -> READ FILE\n")
@@ -21,8 +21,9 @@ class Interface:
             EncryptInterface(option)
             ZipInterface(option)
         elif option == "2":
-            ZipInterface(option)
-            # EncryptInterface(option)
+            file_output = ZipInterface(option)
+            file_output = file_output.get_file_output()
+            EncryptInterface(option, file_output)
 
 if __name__ == '__main__':
     while True:

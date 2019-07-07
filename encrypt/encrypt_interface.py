@@ -3,7 +3,7 @@ from .key_generator import KeyGenerator
 import os
 
 class EncryptInterface:
-    def __init__(self, option):
+    def __init__(self, option, file_output = None):
         # Check for valid input
         if option == "3":
             return None
@@ -39,7 +39,7 @@ class EncryptInterface:
             try:
                 print("\n###############################\n")
                 print("\tPASSWORD:")
-                print("\t" + password.de_crypt(file_name + ".txt"))
+                print("\t" + password.de_crypt(file_output))
                 print("\n###############################\n ")
             except:
                 print("\t;WRONG KEY!")

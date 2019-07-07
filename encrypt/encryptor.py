@@ -10,14 +10,13 @@ class Encryptor:
         self.key = key
         self.fernet = Fernet(key)
         self.pass_directory = 'password/encrypted/'
+        
     def en_crypt(self, file_name, message):
         message = message.encode()
         encrypted = self.fernet.encrypt(message)
         with open(self.pass_directory + file_name + ".txt", 'wb') as ff:
             ff.write(encrypted)
             
-    def de_crypt(self, file_name):
-        with open(self.pass_directory + file_name, 'rb') as ff:
-            fa = ff.read()
-        decrypted_message = self.fernet.decrypt(fa).decode()
+    def de_crypt(self, file_output):
+        decrypted_message = self.fernet.decrypt(file_output).decode()
         return decrypted_message

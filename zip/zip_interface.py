@@ -31,12 +31,13 @@ class ZipInterface:
                 search_file = input("Type file index or search? (1 | 2) ")
             file_index = int(input("File index: "))
             if new_zip_file_names == None:
-                zip_files.read_txt(zip_file_names[file_index])
+                self.file_output = zip_files.read_txt(zip_file_names[file_index])
             else:
-                zip_files.read_txt(new_zip_file_names[file_index])
-        #     file_name = ReadZip.read_zip_names()
-        #     ReadZip.read_file(file_name)
+                self.file_output = zip_files.read_txt(new_zip_file_names[file_index])
         return None
+        
+    def get_file_output(self):
+        return self.file_output
 
 # add and read with zip password
 # read and write with crpytography

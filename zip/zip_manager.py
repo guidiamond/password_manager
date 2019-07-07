@@ -1,6 +1,7 @@
 import os
 from os import path
 from zipfile import ZipFile
+import ruamel.std.zipfile as ruamzip
 
 class ZipManager:
     def __init__(self):
@@ -28,3 +29,11 @@ class ZipManager:
                     if file not in zip.namelist():
                         zip.write(file_location, file)
                         os.remove(encrypted_path + file)
+                    else:
+                        self.delete_zip(file)
+                        zip.write(file_location, file)
+                        os.remove(encrypted_path + file)
+
+    @staticmethod
+    def delete_zip(file_name):
+        ruamzip.delete_from_zip_file('password/password.zip', file_names=[file_name])

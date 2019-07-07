@@ -42,5 +42,5 @@ class EncryptInterface:
                 print("\t" + password.de_crypt(file_output))
                 print("\n###############################\n ")
             except:
-                print("\t;WRONG KEY!")
+                print("\tWRONG KEY!")
                 print("\n###############################\n ")

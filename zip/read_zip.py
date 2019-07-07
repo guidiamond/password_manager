@@ -6,13 +6,17 @@ class ReadZip:
         self.zip_location = os.path.join('password/', 'password.zip')
         with ZipFile(self.zip_location, 'r') as zip:
             self.zip = zip
-    def read_zip(self):
+    def read_zip_names(self):
         return self.zip.namelist()
 
-    def select_file(self, files_list):
+    def print_zip_files(self, files_list):
         for file in files_list:
             print(file + " " + "[" + str(files_list.index(file)) + "]")
 
+    def read_txt(self, file_name):
+        with ZipFile(self.zip_location, 'r') as zip:
+            file_output = zip.read(file_name)
+        return file_output
     # def read_file(file_name):
     #     with ZipFile('password.zip', 'r') as zip:
     #         try:
